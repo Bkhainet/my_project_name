@@ -1,3 +1,12 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+
+parser_google:
+    path: /
+    controller: App\Controller\ParserGoogleController::index
+
+key:
+    path: /key
+    controller: App\Controller\ParserGoogleController::post
+
+show_history:
+    path: /history
+    controller: App\Controller\ParserGoogleController::show_history

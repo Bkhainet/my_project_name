@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParserGoogleController!{% endblock %}
+
+{% block header %}
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h5 class="my-0 mr-md-auto font-weight-normal">Выборка результатов из Google</h5>
+        </div>
+    </header>
+{% endblock %}
+{% block navbar %}
+    <div class="container">
+        <nav class="nav nav-underline">
+            <a class="nav-link active" href="/">Главная </a>
+            <a class="nav-link" href="history">История парсинга</a>
+        </nav>
+    </div>
+{% endblock %}
+{% block error_notDB %}
+    {% for message in app.flashes('tables') %}
+        <div class="container">
+            <div class = "alert alert-danger">
+                <div class="container">
+                    <span class="align-middle">{{ message }}</span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block history %}
+{% for message in app.flashes('success') %}
+<main role="main" class="container">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h2>{{message}}</h2>
+        <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <th scope="col" >id</th>
+
+                        <th scope="col" >Позиция в Google</th>
+
+                        <th scope="col" >Домен</th>
+
+                        <th scope="col" >Ключивое слово</th>
+
+                        <th scope="col" >Заголовок</th>
+
+                        <th scope="col" >Дата выборки</th>
+                        </thead>
+                        <tbody>
+                        {% for row in appointments %}
+                            <tr>
+                                <td class="align-middle">
+                                    {{row.id}}
+                                </td>
+                                <td class="align-middle">
+                                    {{row.getIdGoogle}}
+                                </td>
+                                <td class="align-middle">
+                                    {{row.getDomaineName}}
+                                </td>
+                                <td class="align-middle">
+                                    {{row.getKeyWord}}
+                                </td>
+                                <td class="align-middle">
+                                    {{row.getWord}}
+                                </td>
+                                <td class="align-middle">
+                                    {{row.getCreatedAt|date("H:i:s m/d/y")}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(appointments) }}
+    </div>
+</main>
+{% endfor %}
+{% endblock %}
