@@ -46,8 +46,8 @@ class ParserGoogleController extends AbstractController
             $html = curl_exec($ch);
 
             $html = file_get_contents("parse.txt");
-            preg_match_all('|<div class="BNeawe vvjwJb AP7Wnd">(.*?)</div>|is', $html, $key_word);
-            preg_match_all('|<div class="BNeawe UPmit AP7Wnd">(.*?) [<\s]?|', $html, $domain);
+            preg_match_all('|<div class="BNeawe vvjwJb AP7Wnd">(.*?)</div>|', $html, $key_word);
+            preg_match_all('|<div class="BNeawe UPmit AP7Wnd">(.*?)[\s<]|', $html, $domain);
 
 
             foreach (array_slice($key_word[1], 0, 10) as $key => $item_key_word)
@@ -70,7 +70,6 @@ class ParserGoogleController extends AbstractController
         }
         fclose ($fp);
     }
-
     ///////////////////////////////////////////////////
 //////////////////////////////////////////////////
     public function index()
