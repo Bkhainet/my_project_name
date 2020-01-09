@@ -71,12 +71,6 @@ class ParserGoogleController extends AbstractController
         fclose ($fp);
     }
 
-    public function delete($delete, $table_Google)
-    {
-        $this->getDoctrine()->getRepository(ParserGoogle::class);
-        $em = $this->getDoctrine()->getManager()->remove($table_Google);
-        $em->flush();
-    }
     ///////////////////////////////////////////////////
 //////////////////////////////////////////////////
     public function index()
@@ -160,11 +154,12 @@ class ParserGoogleController extends AbstractController
             $request->query->getInt('page', 1), 10);
 
         $delete = $request->get('delete');
-        if (isset($_POST[$delete]))
+        if (!isset($_POST[$delete]))
         {
-            $this->delete($delete, $table_Google);
-        }
+            $em->remove($table_Google);
+            $em->flush();
 
+        }
         return $this->render('parser_google/history.html.twig', [
             'controller_name' => 'ParserGoogleController',
             'appointments' => $appointments,
