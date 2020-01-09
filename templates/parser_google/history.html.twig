@@ -74,8 +74,26 @@
             </table>
         </div>
     </div>
-    <div class="navigation">
-        {{ knp_pagination_render(appointments) }}
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <form action ="/key" method="POST" class ="form-horizontal">
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-4 themed-grid-col">
+                        <div class="navigation">
+                            {{ knp_pagination_render(appointments) }}
+                        </div>
+                    </div>
+                    <div class="col-md-4 themed-grid-col">
+                        <div class="align-middle text-right">
+                        </div>
+                    </div>
+                    <div class="col-md-4 themed-grid-col">
+                        <button type="submit" class="btn btn-danger">Удалить таблицу</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </main>
 {% endblock %}
+
