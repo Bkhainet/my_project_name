@@ -154,7 +154,7 @@ class ParserGoogleController extends AbstractController
             $request->query->getInt('page', 1), 10);
 
         $delete = $request->get('delete');
-        if (!isset($_POST[$delete]))
+        if (isset($_POST[$delete]))
         {
             $em->remove($table_Google);
             $em->flush();
